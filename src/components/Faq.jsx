@@ -45,7 +45,7 @@ export default function FAQSection() {
   const toggle = (index) => setOpenIndex(openIndex === index ? null : index);
 
   return (
-    <section className="bg-[#000000] text-white font-inter py-24 px-6 border-t border-[#1A1A1A]">
+    <section className="bg-[#000000] text-white font-inter py-24 px-6 border-t border-[#1A1A1A]" id="faq">
       <div className="max-w-6xl mx-auto border border-[#1A1A1A] rounded-md overflow-hidden">
         {/* Header */}
         <div className="p-10 border-b border-[#1A1A1A] text-center">

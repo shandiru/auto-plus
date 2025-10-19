@@ -64,7 +64,7 @@ export default function OurServices() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden bg-[#000000] text-white font-inter py-24 border-t border-[#1A1A1A]">
+    <section className="relative overflow-hidden bg-[#000000] text-white font-inter py-24 border-t border-[#1A1A1A]" id="services">
       {/* Background Glow */}
       <div className="pointer-events-none absolute inset-0 mx-auto max-w-6xl opacity-70">
         <div

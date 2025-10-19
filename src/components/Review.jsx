@@ -63,7 +63,7 @@ export default function AutoPlusTestimonial() {
   }, [index]);
 
   return (
-    <section className="bg-[#000000] text-white font-inter py-20 md:py-24 px-4 sm:px-6 overflow-hidden border-t border-[#1A1A1A]">
+    <section className="bg-[#000000] text-white font-inter py-20 md:py-24 px-4 sm:px-6 overflow-hidden border-t border-[#1A1A1A]" id="review">
       <div className="max-w-6xl mx-auto border border-[#1A1A1A] bg-[#0A0A0A] rounded-md">
         {/* Header */}
         <div className="text-center py-10 sm:py-12 border-b border-[#1A1A1A] px-4">

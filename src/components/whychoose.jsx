@@ -7,7 +7,7 @@ export default function WhyChooseUs() {
   const [activeCard, setActiveCard] = useState(null);
 
   return (
-    <section className="relative bg-[#000000] text-[#F5F5F5] font-inter py-24 px-6 overflow-hidden">
+    <section className="relative bg-[#000000] text-[#F5F5F5] font-inter py-24 px-6 overflow-hidden" id="whychooseus">
       <div className="max-w-6xl mx-auto text-center">
         {/* Header */}
         <p className="inline-block border border-[#ff3b3b33] text-xs tracking-[4px] uppercase px-6 py-1 rounded-full text-[#ff6666] mb-6">

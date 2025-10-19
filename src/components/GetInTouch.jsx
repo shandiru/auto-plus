@@ -5,7 +5,7 @@ import { FaWhatsapp, FaInstagram, FaFacebook, FaPhone, FaEnvelope } from "react-
 
 export default function ContactCard() {
   return (
-    <section className="relative bg-[#000000] text-[#F5F5F5] font-inter py-24 px-6 flex items-center justify-center overflow-hidden">
+    <section className="relative bg-[#000000] text-[#F5F5F5] font-inter py-24 px-6 flex items-center justify-center overflow-hidden" id="contact">
       <div className="max-w-4xl w-full">
         {/* Header */}
         <div className="text-center mb-12">

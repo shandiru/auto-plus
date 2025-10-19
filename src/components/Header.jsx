@@ -33,7 +33,7 @@ export default function Header() {
 
         {/* ✅ Desktop Nav */}
         <nav className="hidden md:flex items-center gap-8 text-sm uppercase tracking-wide">
-          {["Home", "Services", "FAQ", "Contact"].map((item) => (
+          {["Home", "Services", "FAQ", "Contact","WhyChooseUs","Review"].map((item) => (
             <a
               key={item}
               href={`#${item.toLowerCase()}`}
@@ -67,7 +67,7 @@ export default function Header() {
       {isOpen && (
         <div className="md:hidden bg-[#000000] border-t border-[#1A1A1A]">
           <nav className="flex flex-col items-center py-6 space-y-4 text-sm uppercase tracking-wide">
-            {["Home", "Services", "FAQ", "Contact"].map((item) => (
+            {["Home", "Services", "FAQ", "Contact,WhyChooseUs","Review"].map((item) => (
               <a
                 key={item}
                 href={`#${item.toLowerCase()}`}
