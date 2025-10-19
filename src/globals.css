@@ -1,0 +1,18 @@
+/* globals.css */
+:root {
+  /* Brand Colors */
+  --brand-primary: #E1912F;
+  --brand-secondary: #D57A20;
+
+  /* Navbar */
+  --nav-bg: transparent;
+  --nav-bg-scrolled: rgba(0, 0, 0, 0.9);
+  --nav-text: #ffffff;
+  --nav-hover: var(--brand-primary);
+
+  /* Button */
+  --btn-text: #000000;
+  --btn-bg-start: var(--brand-primary);
+  --btn-bg-end: var(--brand-secondary);
+  --btn-hover-shadow: 0 0 20px var(--brand-primary);
+}
