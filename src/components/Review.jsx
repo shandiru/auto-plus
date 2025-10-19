@@ -8,23 +8,24 @@ export default function AutoPlusTestimonial() {
 
   const testimonials = [
     {
-      name: "David H.",
+      name: "Cally Keetley .",
       role: "Customer from Nottingham",
-      text: "“AutoPlus came to my home the same day and fixed a complex electrical issue that other garages couldn’t. Professional, fast, and friendly service.”",
-      img: "https://randomuser.me/api/portraits/men/30.jpg",
+      text: "“Rang on the Monday, got an appointment for Tuesday with plenty of upfront and transparent information about costs. Mike was quick and efficient and fixed the issue (fault with electric windows) in less than an hour.”",
+      img: "c.png",
+    },
+     {
+      name: "Tommy Merrall .",
+      role: "Customer from Nottingham",
+      text: "“BMW X5 electrical issues, 4 hours later car fixed and running. 5 star thank you..”",
+      img: "t.png",
     },
     {
-      name: "Samantha R.",
-      role: "Fleet Manager, Nottinghamshire",
-      text: "“We use AutoPlus regularly for our company vehicles. Their mobile diagnostics and key programming save us time and money — highly recommended!”",
-      img: "https://randomuser.me/api/portraits/women/40.jpg",
+      name: "Sylwia Ksiazkiewicz.",
+      role: "Customer from Nottingham",
+      text: "“Profesional and quick.Highly recommended.”",
+      img: "s.png",
     },
-    {
-      name: "Ben L.",
-      role: "Auto Trader Partner",
-      text: "“They’ve been our go-to team for all electrical diagnostics and coding work. Reliable, knowledgeable, and always on time.”",
-      img: "https://randomuser.me/api/portraits/men/25.jpg",
-    },
+   
   ];
 
   const [index, setIndex] = useState(0);
