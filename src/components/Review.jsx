@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 export default function AutoPlusTestimonial() {
   const accent = "#FF3B3B"; // 🔴 AutoPlus Red
@@ -13,7 +15,7 @@ export default function AutoPlusTestimonial() {
       text: "“Rang on the Monday, got an appointment for Tuesday with plenty of upfront and transparent information about costs. Mike was quick and efficient and fixed the issue (fault with electric windows) in less than an hour.”",
       img: "c.png",
     },
-     {
+    {
       name: "Tommy Merrall .",
       role: "Customer from Nottingham",
       text: "“BMW X5 electrical issues, 4 hours later car fixed and running. 5 star thank you..”",
@@ -22,16 +24,23 @@ export default function AutoPlusTestimonial() {
     {
       name: "Sylwia Ksiazkiewicz.",
       role: "Customer from Nottingham",
-      text: "“Profesional and quick.Highly recommended.”",
+      text: "“Profesional and quick. Highly recommended.”",
       img: "s.png",
     },
-   
   ];
 
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   const [typedText, setTypedText] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      easing: "ease-in-out",
+      once: false, // allows re-triggering when scrolling up/down
+    });
+  }, []);
 
   const next = () => {
     setDirection(1);
@@ -63,27 +72,47 @@ export default function AutoPlusTestimonial() {
   }, [index]);
 
   return (
-    <section className="bg-[#000000] text-white font-inter py-20 md:py-24 px-4 sm:px-6 overflow-hidden border-t border-[#1A1A1A]" id="review">
-      <div className="max-w-6xl mx-auto border border-[#1A1A1A] bg-[#0A0A0A] rounded-md">
+    <section
+      className="bg-[#000000] text-white font-inter py-20 md:py-24 px-4 sm:px-6 overflow-hidden border-t border-[#1A1A1A]"
+      id="review"
+    >
+      <div
+        data-aos="fade-up"
+        className="max-w-6xl mx-auto border border-[#1A1A1A] bg-[#0A0A0A] rounded-md"
+      >
         {/* Header */}
-        <div className="text-center py-10 sm:py-12 border-b border-[#1A1A1A] px-4">
+        <div
+          data-aos="fade-down"
+          className="text-center py-10 sm:py-12 border-b border-[#1A1A1A] px-4"
+        >
           {/* Small red pill heading */}
           <p className="inline-block border border-[#ff3b3b33] text-xs tracking-[4px] uppercase px-6 py-1 rounded-full text-[#ff6666] mb-6">
             Review
           </p>
 
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight leading-snug">
+          <h2
+            data-aos="zoom-in"
+            className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight leading-snug"
+          >
             What Our{" "}
             <span className="text-[#FF3B3B] italic">Customers Say</span>
           </h2>
-          <p className="text-[#CCCCCC] text-sm sm:text-base mt-3 max-w-2xl mx-auto">
+          <p
+            data-aos="fade-up"
+            data-aos-delay="150"
+            className="text-[#CCCCCC] text-sm sm:text-base mt-3 max-w-2xl mx-auto"
+          >
             Real feedback from our happy customers across Nottinghamshire who
             trust AutoPlus for all their electrical and diagnostic needs.
           </p>
         </div>
 
         {/* Main Section */}
-        <div className="flex flex-col md:flex-row relative overflow-hidden">
+        <div
+          data-aos="fade-up"
+          data-aos-delay="250"
+          className="flex flex-col md:flex-row relative overflow-hidden"
+        >
           {/* LEFT SIDE */}
           <div
             className="flex-1 relative p-8 sm:p-10 md:p-14 border-b md:border-b-0 md:border-r border-[#1A1A1A]
@@ -100,7 +129,10 @@ export default function AutoPlusTestimonial() {
                 className="absolute inset-0 p-8 sm:p-10 md:p-14"
               >
                 {/* Avatar */}
-                <div className="flex items-center gap-3 mb-6 sm:mb-8">
+                <div
+                  data-aos="fade-right"
+                  className="flex items-center gap-3 mb-6 sm:mb-8"
+                >
                   <div className="relative">
                     <img
                       src={t.img}
@@ -117,7 +149,11 @@ export default function AutoPlusTestimonial() {
                 </div>
 
                 {/* Quote with typing animation */}
-                <p className="text-[20px] sm:text-[22px] md:text-[26px] leading-relaxed text-[#EEEEEE] max-w-[62ch] min-h-[150px]">
+                <p
+                  data-aos="zoom-in"
+                  data-aos-delay="150"
+                  className="text-[20px] sm:text-[22px] md:text-[26px] leading-relaxed text-[#EEEEEE] max-w-[62ch] min-h-[150px]"
+                >
                   {typedText}
                   {isTyping && (
                     <span className="animate-pulse text-[#FF3B3B]">|</span>
@@ -125,7 +161,11 @@ export default function AutoPlusTestimonial() {
                 </p>
 
                 {/* Name + Role */}
-                <div className="mt-8 sm:mt-12">
+                <div
+                  data-aos="fade-up"
+                  data-aos-delay="300"
+                  className="mt-8 sm:mt-12"
+                >
                   <p className="font-semibold text-white">{t.name}</p>
                   <p className="text-[#AAAAAA] text-[14px] sm:text-[15px]">
                     {t.role}
@@ -141,7 +181,11 @@ export default function AutoPlusTestimonial() {
           </div>
 
           {/* RIGHT SIDE - Buttons */}
-          <div className="md:w-[320px] flex flex-col justify-end bg-[#0A0A0A] border-l border-t border-[#1A1A1A]">
+          <div
+            data-aos="fade-left"
+            data-aos-delay="200"
+            className="md:w-[320px] flex flex-col justify-end bg-[#0A0A0A] border-l border-t border-[#1A1A1A]"
+          >
             {/* Previous */}
             <motion.button
               whileTap={{ scale: 0.95 }}

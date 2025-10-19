@@ -1,33 +1,62 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Car, Wrench, Cpu } from "lucide-react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 export default function WhyChooseUs() {
   const [activeCard, setActiveCard] = useState(null);
 
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      easing: "ease-in-out",
+      once: false, // animate again when scrolling back up
+    });
+  }, []);
+
   return (
-    <section className="relative bg-[#000000] text-[#F5F5F5] font-inter py-24 px-6 overflow-hidden" id="whychooseus">
+    <section
+      className="relative bg-[#000000] text-[#F5F5F5] font-inter py-24 px-6 overflow-hidden"
+      id="whychooseus"
+    >
       <div className="max-w-6xl mx-auto text-center">
         {/* Header */}
-        <p className="inline-block border border-[#ff3b3b33] text-xs tracking-[4px] uppercase px-6 py-1 rounded-full text-[#ff6666] mb-6">
+        <p
+          data-aos="fade-down"
+          className="inline-block border border-[#ff3b3b33] text-xs tracking-[4px] uppercase px-6 py-1 rounded-full text-[#ff6666] mb-6"
+        >
           Benefits
         </p>
-        <h2 className="text-5xl font-medium text-white">
+        <h2
+          data-aos="zoom-in"
+          className="text-5xl font-medium text-white"
+        >
           Why Choose{" "}
           <span className="italic font-[Instrument_Serif] text-[#ff3b3b]">
             Us?
           </span>
         </h2>
-        <p className="text-[#aaaaaa] mt-4 mb-16 text-base">
+        <p
+          data-aos="fade-up"
+          data-aos-delay="150"
+          className="text-[#aaaaaa] mt-4 mb-16 text-base"
+        >
           Everything you need for expert mobile auto electrical service — fast,
           reliable, and professional.
         </p>
 
         {/* Cards */}
-        <div className="grid md:grid-cols-3 gap-8">
+        <div
+          data-aos="fade-up"
+          data-aos-delay="200"
+          className="grid md:grid-cols-3 gap-8"
+        >
           {/* 🚗 CARD 1 — Car Drive Animation */}
           <motion.div
+            data-aos="zoom-in-up"
+            data-aos-delay="150"
             onHoverStart={() => setActiveCard(1)}
             onHoverEnd={() => setActiveCard(null)}
             onClick={() => setActiveCard(activeCard === 1 ? null : 1)}
@@ -116,6 +145,8 @@ export default function WhyChooseUs() {
 
           {/* 🔧 CARD 2 — Wrench Motion */}
           <motion.div
+            data-aos="zoom-in-up"
+            data-aos-delay="300"
             onHoverStart={() => setActiveCard(2)}
             onHoverEnd={() => setActiveCard(null)}
             onClick={() => setActiveCard(activeCard === 2 ? null : 2)}
@@ -170,6 +201,8 @@ export default function WhyChooseUs() {
 
           {/* ⚙️ CARD 3 — CPU Pulse */}
           <motion.div
+            data-aos="zoom-in-up"
+            data-aos-delay="450"
             onHoverStart={() => setActiveCard(3)}
             onHoverEnd={() => setActiveCard(null)}
             onClick={() => setActiveCard(activeCard === 3 ? null : 3)}

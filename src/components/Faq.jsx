@@ -1,7 +1,9 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus } from "lucide-react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 export default function FAQSection() {
   const accent = "#FF3B3B"; // 🔴 AutoPlus Red
@@ -44,31 +46,61 @@ export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState(null);
   const toggle = (index) => setOpenIndex(openIndex === index ? null : index);
 
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      easing: "ease-in-out",
+      once: false, // allows animation to trigger when scrolling up/down
+    });
+  }, []);
+
   return (
-    <section className="bg-[#000000] text-white font-inter py-24 px-6 border-t border-[#1A1A1A]" id="faq">
-      <div className="max-w-6xl mx-auto border border-[#1A1A1A] rounded-md overflow-hidden">
+    <section
+      className="bg-[#000000] text-white font-inter py-24 px-6 border-t border-[#1A1A1A]"
+      id="faq"
+    >
+      <div
+        data-aos="fade-up"
+        className="max-w-6xl mx-auto border border-[#1A1A1A] rounded-md overflow-hidden"
+      >
         {/* Header */}
-        <div className="p-10 border-b border-[#1A1A1A] text-center">
-          {/* Small red pill heading (same as Benefits) */}
+        <div
+          data-aos="fade-down"
+          className="p-10 border-b border-[#1A1A1A] text-center"
+        >
+          {/* Small red pill heading */}
           <p className="inline-block border border-[#ff3b3b33] text-xs tracking-[4px] uppercase px-6 py-1 rounded-full text-[#ff6666] mb-6">
             FAQ
           </p>
 
-          <h2 className="text-4xl md:text-5xl font-semibold tracking-tight">
+          <h2
+            data-aos="zoom-in"
+            className="text-4xl md:text-5xl font-semibold tracking-tight"
+          >
             Frequently Asked{" "}
             <span className="text-[#FF3B3B] italic">Questions</span>
           </h2>
-          <p className="text-[#CCCCCC] mt-3 text-base max-w-2xl mx-auto">
+          <p
+            data-aos="fade-up"
+            data-aos-delay="150"
+            className="text-[#CCCCCC] mt-3 text-base max-w-2xl mx-auto"
+          >
             Everything you need to know about our mobile auto electrical
             services in Nottinghamshire.
           </p>
         </div>
 
         {/* FAQ Two Columns */}
-        <div className="md:columns-2 border-t border-[#1A1A1A] [column-gap:0]">
+        <div
+          data-aos="fade-up"
+          data-aos-delay="250"
+          className="md:columns-2 border-t border-[#1A1A1A] [column-gap:0]"
+        >
           {faqs.map((faq, i) => (
             <div
               key={i}
+              data-aos="fade-up"
+              data-aos-delay={100 + i * 50}
               onClick={() => toggle(i)}
               className={`break-inside-avoid border-b border-[#1A1A1A] p-6 sm:p-8 cursor-pointer transition-colors ${
                 i % 2 === 0 ? "md:border-r" : ""
@@ -91,6 +123,7 @@ export default function FAQSection() {
               <AnimatePresence initial={false}>
                 {openIndex === i && (
                   <motion.div
+                    data-aos="fade-in"
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: "auto" }}
                     exit={{ opacity: 0, height: 0 }}

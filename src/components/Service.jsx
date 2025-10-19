@@ -1,5 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 export default function OurServices() {
   const [active, setActive] = useState(0);
@@ -56,6 +58,12 @@ export default function OurServices() {
   ];
 
   useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      easing: "ease-in-out",
+      once: false, // allows animation on both scroll up & down
+    });
+
     const timer = setInterval(
       () => setActive((prev) => (prev + 1) % services.length),
       6000
@@ -64,7 +72,10 @@ export default function OurServices() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden bg-[#000000] text-white font-inter py-24 border-t border-[#1A1A1A]" id="services">
+    <section
+      className="relative overflow-hidden bg-[#000000] text-white font-inter py-24 border-t border-[#1A1A1A]"
+      id="services"
+    >
       {/* Background Glow */}
       <div className="pointer-events-none absolute inset-0 mx-auto max-w-6xl opacity-70">
         <div
@@ -78,22 +89,36 @@ export default function OurServices() {
 
       <div className="relative z-10 mx-auto max-w-6xl px-6 text-center">
         {/* Section Badge */}
-        <p className="inline-block border border-[#ff3b3b33] text-xs tracking-[4px] uppercase px-6 py-1 rounded-full text-[#ff6666] mb-6">
+        <p
+          data-aos="fade-down"
+          className="inline-block border border-[#ff3b3b33] text-xs tracking-[4px] uppercase px-6 py-1 rounded-full text-[#ff6666] mb-6"
+        >
           Our Services
         </p>
 
         {/* Heading */}
-        <h2 className="mb-3 text-4xl md:text-5xl font-semibold text-white">
+        <h2
+          data-aos="zoom-in"
+          className="mb-3 text-4xl md:text-5xl font-semibold text-white"
+        >
           Expert <span className="italic text-[#FF3B3B]">Auto Electrical</span>{" "}
           Solutions
         </h2>
-        <p className="mb-20 text-base text-[#AAAAAA] max-w-2xl mx-auto">
+        <p
+          data-aos="fade-up"
+          data-aos-delay="150"
+          className="mb-20 text-base text-[#AAAAAA] max-w-2xl mx-auto"
+        >
           From diagnostics to key programming, we bring professional-grade
           service directly to your driveway.
         </p>
 
         {/* 3D Card Stack */}
-        <div className="relative mx-auto flex h-[520px] w-full max-w-[940px] items-center justify-center [perspective:1400px] [transform-style:preserve-3d]">
+        <div
+          data-aos="fade-up"
+          data-aos-delay="200"
+          className="relative mx-auto flex h-[520px] w-full max-w-[940px] items-center justify-center [perspective:1400px] [transform-style:preserve-3d]"
+        >
           {services.map((s, i) => {
             const offset = i - active;
             const depth = Math.abs(offset);
@@ -105,6 +130,8 @@ export default function OurServices() {
             return (
               <div
                 key={s.id}
+                data-aos="zoom-in-up"
+                data-aos-delay={i * 100}
                 className="absolute w-full transition-all duration-[1100ms] ease-[cubic-bezier(0.4,0,0.2,1)]"
                 style={{
                   transform: `translateY(${translateY}px) translateZ(${translateZ}px) scale(${scale})`,
@@ -132,6 +159,8 @@ export default function OurServices() {
                         {s.stats.map((stat) => (
                           <div
                             key={stat.label}
+                            data-aos="fade-up"
+                            data-aos-delay="400"
                             className="flex-1 min-w-[140px] rounded-lg border border-[#ff3b3b33] bg-[#111111]/60 p-4 text-center transition hover:bg-[#1A1A1A]"
                           >
                             <div className="text-2xl font-semibold text-white">
@@ -146,7 +175,10 @@ export default function OurServices() {
                     </div>
 
                     {/* Image */}
-                    <div className="relative h-56 md:h-64 overflow-hidden rounded-xl shadow-[0_0_25px_rgba(0,0,0,0.3)]">
+                    <div
+                      data-aos="fade-left"
+                      className="relative h-56 md:h-64 overflow-hidden rounded-xl shadow-[0_0_25px_rgba(0,0,0,0.3)]"
+                    >
                       <img
                         src={s.image}
                         alt={s.title}
@@ -162,7 +194,11 @@ export default function OurServices() {
         </div>
 
         {/* Navigation Dots */}
-        <div className="mt-14 flex justify-center gap-2">
+        <div
+          data-aos="fade-up"
+          data-aos-delay="400"
+          className="mt-14 flex justify-center gap-2"
+        >
           {services.map((_, i) => (
             <button
               key={i}

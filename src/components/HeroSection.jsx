@@ -1,8 +1,18 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import { FiPhone, FiArrowRight } from "react-icons/fi";
 
 export default function HeroSection() {
+  useEffect(() => {
+    AOS.init({
+      duration: 1000, // animation duration
+      once: true, // animate only once
+      easing: "ease-in-out",
+    });
+  }, []);
+
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center bg-[#000000] text-white font-inter overflow-hidden">
       {/* Background Image */}
@@ -25,23 +35,40 @@ export default function HeroSection() {
       {/* Content */}
       <div className="relative z-10 text-center px-6 max-w-3xl">
         {/* Tagline */}
-        <p className="text-[#FF6666] tracking-[6px] uppercase text-xs md:text-sm mb-4 border border-[#ff3b3b33] inline-block rounded-full px-6 py-1">
+        <p
+          data-aos="fade-down"
+          className="text-[#FF6666] tracking-[6px] uppercase text-xs md:text-sm mb-4 border border-[#ff3b3b33] inline-block rounded-full px-6 py-1"
+        >
           AutoPlus Nottingham
         </p>
 
         {/* Heading */}
-        <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6 text-white">
-          Reliable <span className="text-[#FF3B3B] italic">Auto Electricians</span> <br />
+        <h1
+          data-aos="zoom-in"
+          className="text-4xl md:text-6xl font-bold leading-tight mb-6 text-white"
+        >
+          Reliable{" "}
+          <span className="text-[#FF3B3B] italic">Auto Electricians</span>{" "}
+          <br />
           You Can Trust
         </h1>
 
         {/* Subheading */}
-        <p className="text-[#AAAAAA] text-base md:text-lg max-w-2xl mx-auto mb-10">
-          Mobile auto electrical repairs, diagnostics, and key programming — done at your home, workplace, or garage with professional-grade precision.
+        <p
+          data-aos="fade-up"
+          data-aos-delay="150"
+          className="text-[#AAAAAA] text-base md:text-lg max-w-2xl mx-auto mb-10"
+        >
+          Mobile auto electrical repairs, diagnostics, and key programming — done
+          at your home, workplace, or garage with professional-grade precision.
         </p>
 
         {/* CTA Buttons */}
-        <div className="flex flex-wrap justify-center gap-4">
+        <div
+          data-aos="fade-up"
+          data-aos-delay="300"
+          className="flex flex-wrap justify-center gap-4"
+        >
           <a
             href="tel:+447495159438"
             className="flex items-center gap-2 bg-[#FF3B3B] text-white font-medium px-6 py-3 rounded-full shadow-[0_0_25px_rgba(255,59,59,0.4)] hover:bg-[#ff5555] hover:shadow-[0_0_35px_rgba(255,59,59,0.6)] transition-all duration-300"
