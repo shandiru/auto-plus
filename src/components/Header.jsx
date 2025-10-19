@@ -1,125 +1,93 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { FiMenu, FiX } from "react-icons/fi";
+import { FiMenu, FiX, FiPhone } from "react-icons/fi"; // ✅ Correct imports
 
-export default function Navbar() {
+export default function Header() {
+  const accent = "#FF3B3B";
   const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
+    const handleScroll = () => setIsScrolled(window.scrollY > 30);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const toggleMenu = () => setIsOpen(!isOpen);
-
   return (
-    <nav
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        scrolled
-          ? "backdrop-blur-md shadow-[0_2px_20px_rgba(255,255,255,0.15)]"
-          : ""
+    <header
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 font-inter ${
+        isScrolled
+          ? "bg-[#000000]/95 backdrop-blur-md border-b border-[#1A1A1A]"
+          : "bg-transparent"
       }`}
-      style={{
-        backgroundColor: scrolled ? "rgba(0,0,0,0.9)" : "transparent",
-      }}
     >
-      <div className="flex justify-between items-center py-4 px-6 md:px-10">
-        {/* Logo */}
-        <a href="#home" className="flex items-center gap-2">
+      <div className="max-w-6xl mx-auto flex items-center justify-between px-6 py-4 md:py-5">
+        {/* ✅ Logo only — larger now */}
+        <a href="/" className="flex items-center">
           <img
-            src="/dcba-logo.svg"
-            alt="Derby City Boxing Academy Logo"
-            className="h-10 w-auto md:h-12"
+            src="/logo.png" // replace with your logo path
+            alt="AutoPlus Logo"
+            className="h-14 w-auto md:h-16 object-contain" // bigger logo
           />
         </a>
 
-        {/* Desktop Menu */}
-        <ul className="hidden md:flex gap-8 font-medium">
-          {["About", "Classes", "Team", "Locations"].map((item) => (
-            <li key={item}>
-              <a
-                href={`#${item.toLowerCase()}`}
-                className="transition-all duration-300"
-                style={{
-                  color: "#E5E5E5",
-                }}
-                onMouseEnter={(e) => (e.target.style.color = "#FFFFFF")}
-                onMouseLeave={(e) => (e.target.style.color = "#E5E5E5")}
-              >
-                {item}
-              </a>
-            </li>
-          ))}
-        </ul>
-
-        {/* Join Button (Desktop) */}
-        <div className="hidden md:flex">
-          <button
-            className="px-6 py-2 rounded-full font-semibold transition-all duration-300 hover:scale-105"
-            style={{
-              backgroundImage: "linear-gradient(to right, #555, #999)",
-              color: "#FFFFFF",
-              boxShadow: "none",
-            }}
-            onMouseEnter={(e) =>
-              (e.target.style.boxShadow = "0 0 10px rgba(255,255,255,0.4)")
-            }
-            onMouseLeave={(e) => (e.target.style.boxShadow = "none")}
-          >
-            Join Today
-          </button>
-        </div>
-
-        {/* Mobile Menu Button */}
-        <button
-          onClick={toggleMenu}
-          className="md:hidden text-3xl focus:outline-none"
-          style={{ color: "#FFFFFF" }}
-          aria-label="Toggle menu"
-        >
-          {isOpen ? <FiX /> : <FiMenu />}
-        </button>
-      </div>
-
-      {/* Mobile Dropdown */}
-      {isOpen && (
-        <div
-          className="md:hidden absolute top-full left-0 w-full flex flex-col items-center gap-6 py-6 font-medium transition-all duration-300"
-          style={{ backgroundColor: "rgba(0, 0, 0, 0.95)", color: "#E5E5E5" }}
-        >
-          {["About", "Classes", "Pricing", "Locations"].map((item) => (
+        {/* ✅ Desktop Nav */}
+        <nav className="hidden md:flex items-center gap-8 text-sm uppercase tracking-wide">
+          {["Home", "Services", "FAQ", "Contact"].map((item) => (
             <a
               key={item}
               href={`#${item.toLowerCase()}`}
-              onClick={toggleMenu}
-              className="transition"
-              style={{ color: "#E5E5E5" }}
-              onMouseEnter={(e) => (e.target.style.color = "#FFFFFF")}
-              onMouseLeave={(e) => (e.target.style.color = "#E5E5E5")}
+              className="text-[#CCCCCC] hover:text-[#FF3B3B] transition-colors"
             >
               {item}
             </a>
           ))}
+        </nav>
 
-          <button
-            onClick={toggleMenu}
-            className="px-6 py-2 rounded-full font-semibold transition-all duration-300 hover:scale-105"
-            style={{
-              backgroundImage: "linear-gradient(to right, #555, #999)",
-              color: "#FFFFFF",
-              boxShadow: "none",
-            }}
-            onMouseEnter={(e) =>
-              (e.target.style.boxShadow = "0 0 10px rgba(255,255,255,0.4)")
-            }
-            onMouseLeave={(e) => (e.target.style.boxShadow = "none")}
-          >
-            Join Today
-          </button>
+        {/* ✅ Call Now Button */}
+        <a
+          href="tel:+447495159438"
+          className="hidden md:flex items-center gap-2 bg-[#FF3B3B] text-white text-sm font-medium px-5 py-2 rounded-full shadow-[0_0_20px_rgba(255,59,59,0.3)] hover:bg-[#ff5555] transition"
+        >
+          <FiPhone size={16} />
+          Call Now
+        </a>
+
+        {/* ✅ Mobile Menu Toggle */}
+        <button
+          className="md:hidden text-white"
+          onClick={() => setIsOpen(!isOpen)}
+          aria-label="Toggle menu"
+        >
+          {isOpen ? <FiX size={26} /> : <FiMenu size={26} />}
+        </button>
+      </div>
+
+      {/* ✅ Mobile Menu */}
+      {isOpen && (
+        <div className="md:hidden bg-[#000000] border-t border-[#1A1A1A]">
+          <nav className="flex flex-col items-center py-6 space-y-4 text-sm uppercase tracking-wide">
+            {["Home", "Services", "FAQ", "Contact"].map((item) => (
+              <a
+                key={item}
+                href={`#${item.toLowerCase()}`}
+                className="text-[#CCCCCC] hover:text-[#FF3B3B] transition-colors"
+                onClick={() => setIsOpen(false)}
+              >
+                {item}
+              </a>
+            ))}
+            <a
+              href="tel:+447495159438"
+              className="flex items-center gap-2 bg-[#FF3B3B] text-white text-sm font-medium px-5 py-2 rounded-full shadow-[0_0_20px_rgba(255,59,59,0.3)] hover:bg-[#ff5555] transition"
+              onClick={() => setIsOpen(false)}
+            >
+              <FiPhone size={16} />
+              Call Now
+            </a>
+          </nav>
         </div>
       )}
-    </nav>
+    </header>
   );
 }

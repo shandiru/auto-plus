@@ -1,79 +1,116 @@
 "use client";
 import React from "react";
+import { Phone, Mail, MapPin, Facebook, Instagram, Wrench } from "lucide-react";
 
 export default function Footer() {
+  const accent = "#FF3B3B";
+
   return (
-    <footer className="bg-[#000000] text-gray-400 py-10 border-t border-[#1a1a1a] font-inter">
-      <div className="max-w-7xl mx-auto px-6 md:px-10">
-        {/* 🔹 Top Row */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          {/* Logo */}
-          <div className="flex items-center space-x-2">
-            <h2 className="text-2xl font-bold text-white tracking-tight">
-              Kombat
+    <footer className="bg-[#000000] text-white font-inter border-t border-[#1A1A1A]">
+      <div className="max-w-6xl mx-auto px-6 py-16">
+        {/* GRID */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 border-b border-[#1A1A1A] pb-12">
+          {/* Column 1 - Brand */}
+          <div>
+            <h2 className="text-2xl font-bold tracking-tight">
+              Auto<span className="text-[#FF3B3B]">Plus</span>
             </h2>
-            <span className="text-[#D0182B] text-xl font-semibold">
-              Kinetics
-            </span>
+            <p className="text-[#CCCCCC] text-sm mt-4 leading-relaxed max-w-[260px]">
+              Professional mobile auto electricians providing expert diagnostics,
+              key programming, and electrical repairs across Nottinghamshire.
+            </p>
           </div>
 
-          {/* Nav Links */}
-          <ul className="flex flex-wrap justify-center gap-6 text-sm uppercase tracking-wide font-medium">
-            <li>
-              <a
-                href="#about"
-                className="hover:text-[#D0182B] transition-colors"
-              >
-                About
-              </a>
-            </li>
-            <li>
-              <a
-                href="#classes"
-                className="hover:text-[#D0182B] transition-colors"
-              >
-              Classes
-              </a>
-            </li>
-            <li>
-              <a
-                href="#team"
-                className="hover:text-[#D0182B] transition-colors"
-              >
-               Team
-              </a>
-            </li>
-           
-            <li>
-              <a
-                href="#locations"
-                className="hover:text-[#D0182B] transition-colors"
-              >
-                Locations
-              </a>
-            </li>
-          </ul>
+          {/* Column 2 - Contact */}
+          <div>
+            <h4 className="text-lg font-semibold mb-5 text-white">Contact</h4>
+            <ul className="space-y-3 text-[#CCCCCC] text-sm">
+              <li className="flex items-center gap-3 hover:text-[#FF3B3B] transition-colors">
+                <Phone size={18} color={accent} />
+                <a href="tel:+447495159438">+44 7495 159438</a>
+              </li>
+              <li className="flex items-center gap-3 hover:text-[#FF3B3B] transition-colors">
+                <Mail size={18} color={accent} />
+                <a href="mailto:info@autoplusnottingham.co.uk">
+                  info@autoplusnottingham.co.uk
+                </a>
+              </li>
+              <li className="flex items-start gap-3 hover:text-[#FF3B3B] transition-colors">
+                <MapPin size={18} color={accent} className="mt-1" />
+                <span>Nottinghamshire, United Kingdom</span>
+              </li>
+            </ul>
+          </div>
+
+          {/* Column 3 - Services */}
+          <div>
+            <h4 className="text-lg font-semibold mb-5 text-white">Our Services</h4>
+            <ul className="space-y-3 text-[#CCCCCC] text-sm">
+              <li className="hover:text-[#FF3B3B] transition-colors cursor-pointer">
+                Auto Electrical Repairs
+              </li>
+              <li className="hover:text-[#FF3B3B] transition-colors cursor-pointer">
+                Diagnostics
+              </li>
+              <li className="hover:text-[#FF3B3B] transition-colors cursor-pointer">
+                Key Cutting
+              </li>
+              <li className="hover:text-[#FF3B3B] transition-colors cursor-pointer">
+                Key Programming
+              </li>
+              <li className="hover:text-[#FF3B3B] transition-colors cursor-pointer">
+                Dashcam Installation
+              </li>
+            </ul>
+          </div>
+
+          {/* Column 4 - Quick Links */}
+          <div>
+            <h4 className="text-lg font-semibold mb-5 text-white">Quick Links</h4>
+            <ul className="space-y-3 text-[#CCCCCC] text-sm">
+              <li className="hover:text-[#FF3B3B] transition-colors cursor-pointer">
+                Home
+              </li>
+              <li className="hover:text-[#FF3B3B] transition-colors cursor-pointer">
+                About Us
+              </li>
+              <li className="hover:text-[#FF3B3B] transition-colors cursor-pointer">
+                FAQ
+              </li>
+              <li className="hover:text-[#FF3B3B] transition-colors cursor-pointer">
+                Contact
+              </li>
+            </ul>
+          </div>
         </div>
 
-        {/* 🔸 Divider */}
-        <div className="border-t border-[#1a1a1a] my-6"></div>
+        {/* Bottom Bar */}
+        <div className="flex flex-col md:flex-row items-center justify-between pt-8 text-sm text-[#777777] gap-4">
+          <p>
+            © {new Date().getFullYear()} AutoPlus Nottingham. All rights reserved.
+          </p>
 
-        {/* 🔹 Bottom Row */}
-        <div className="flex flex-col md:flex-row items-center justify-between text-sm text-gray-500">
-          <p className="text-center md:text-left">
-            © {new Date().getFullYear()} Kombat Kinetics Derby. All rights reserved.
-          </p>
-          <p className="text-center md:text-right mt-2 md:mt-0">
-            Powered by{" "}
+          {/* Social Icons */}
+          <div className="flex items-center gap-4">
             <a
-              href="https://www.ansely.co.uk/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#D0182B] hover:text-white font-semibold transition-colors"
+              href="#"
+              className="p-2 border border-[#1A1A1A] rounded-full hover:bg-[#FF3B3B] transition"
             >
-              Ansely
+              <Facebook size={16} />
             </a>
-          </p>
+            <a
+              href="#"
+              className="p-2 border border-[#1A1A1A] rounded-full hover:bg-[#FF3B3B] transition"
+            >
+              <Instagram size={16} />
+            </a>
+            <a
+              href="#"
+              className="p-2 border border-[#1A1A1A] rounded-full hover:bg-[#FF3B3B] transition"
+            >
+              <Wrench size={16} />
+            </a>
+          </div>
         </div>
       </div>
     </footer>
