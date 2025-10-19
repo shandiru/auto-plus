@@ -65,13 +65,13 @@ export default function OurServices() {
 
   return (
     <section className="relative overflow-hidden bg-[#000000] text-white font-inter py-24 border-t border-[#1A1A1A]">
-      {/* Red Glow background */}
-      <div className="pointer-events-none absolute inset-0 mx-auto max-w-6xl opacity-60">
+      {/* Background Glow */}
+      <div className="pointer-events-none absolute inset-0 mx-auto max-w-6xl opacity-70">
         <div
-          className="absolute left-1/2 top-[20%] -translate-x-1/2 w-[1200px] h-[1200px] rounded-full blur-3xl"
+          className="absolute left-1/2 top-[25%] -translate-x-1/2 w-[1400px] h-[1400px] rounded-full blur-[150px]"
           style={{
             background:
-              "radial-gradient(60% 60% at 50% 35%, rgba(255,59,59,0.08) 0%, rgba(0,0,0,0) 70%)",
+              "radial-gradient(circle, rgba(255,59,59,0.1) 0%, transparent 70%)",
           }}
         />
       </div>
@@ -87,68 +87,72 @@ export default function OurServices() {
           Expert <span className="italic text-[#FF3B3B]">Auto Electrical</span>{" "}
           Solutions
         </h2>
-        <p className="mb-16 text-base text-[#AAAAAA] max-w-2xl mx-auto">
+        <p className="mb-20 text-base text-[#AAAAAA] max-w-2xl mx-auto">
           From diagnostics to key programming, we bring professional-grade
           service directly to your driveway.
         </p>
 
-        {/* Service Stack */}
-        <div className="relative mx-auto flex h-[470px] w-full max-w-[920px] items-center justify-center [perspective:1200px] [transform-style:preserve-3d]">
+        {/* 3D Card Stack */}
+        <div className="relative mx-auto flex h-[520px] w-full max-w-[940px] items-center justify-center [perspective:1400px] [transform-style:preserve-3d]">
           {services.map((s, i) => {
             const offset = i - active;
             const depth = Math.abs(offset);
             const isActive = offset === 0;
-            const translateY = offset * 44;
-            const translateZ = -depth * 80;
-            const scale = 1 - depth * 0.06;
+            const translateY = offset * 50;
+            const translateZ = -depth * 120;
+            const scale = 1 - depth * 0.08;
 
             return (
               <div
                 key={s.id}
-                className="absolute w-full transition-all duration-[900ms] ease-[cubic-bezier(0.4,0,0.2,1)]"
+                className="absolute w-full transition-all duration-[1100ms] ease-[cubic-bezier(0.4,0,0.2,1)]"
                 style={{
                   transform: `translateY(${translateY}px) translateZ(${translateZ}px) scale(${scale})`,
                   zIndex: 100 - depth,
-                  opacity: isActive ? 1 : 0.7,
-                  filter: isActive ? "none" : "blur(1px)",
+                  opacity: isActive ? 1 : 0.65,
+                  filter: isActive ? "none" : "blur(2px) brightness(0.8)",
                 }}
               >
-                <article className="rounded-2xl border border-[#ff3b3b22] bg-[#0A0A0A]/95 shadow-[0_0_45px_rgba(255,59,59,0.16)] backdrop-blur-md overflow-hidden">
+                <article className="rounded-2xl border border-[#ff3b3b33] bg-[#0A0A0A]/95 shadow-[0_0_50px_rgba(255,59,59,0.15)] backdrop-blur-md overflow-hidden hover:shadow-[0_0_60px_rgba(255,59,59,0.25)] transition-shadow duration-700">
                   {/* Header */}
-                  <div className="bg-[#1A1A1A]/60 px-5 py-2 text-left border-b border-[#ff3b3b22]">
-                    <h3 className="text-lg font-semibold text-[#FF3B3B]">
+                  <div className="bg-[#141414]/80 px-6 py-3 text-left border-b border-[#ff3b3b33]">
+                    <h3 className="text-lg md:text-xl font-semibold text-[#FF3B3B] tracking-wide">
                       {s.title}
                     </h3>
                   </div>
 
                   {/* Body */}
-                  <div className="grid md:grid-cols-2 items-center gap-8 p-8">
+                  <div className="grid md:grid-cols-2 items-center gap-8 p-8 md:p-10">
+                    {/* Text */}
                     <div className="text-left">
-                      <p className="mb-6 text-sm leading-relaxed text-[#CCCCCC]">
+                      <p className="mb-8 text-[15px] leading-relaxed text-[#CCCCCC]">
                         {s.description}
                       </p>
-                      <div className="flex gap-4">
+                      <div className="flex flex-wrap gap-4">
                         {s.stats.map((stat) => (
                           <div
                             key={stat.label}
-                            className="flex-1 rounded-lg border border-[#ff3b3b33] bg-[#111111]/60 p-4 text-center transition hover:bg-[#1A1A1A]"
+                            className="flex-1 min-w-[140px] rounded-lg border border-[#ff3b3b33] bg-[#111111]/60 p-4 text-center transition hover:bg-[#1A1A1A]"
                           >
                             <div className="text-2xl font-semibold text-white">
                               {stat.value}
                             </div>
-                            <div className="text-xs text-[#AAAAAA]">
+                            <div className="text-xs text-[#AAAAAA] mt-1">
                               {stat.label}
                             </div>
                           </div>
                         ))}
                       </div>
                     </div>
-                    <div className="relative h-52 overflow-hidden rounded-xl shadow-lg">
+
+                    {/* Image */}
+                    <div className="relative h-56 md:h-64 overflow-hidden rounded-xl shadow-[0_0_25px_rgba(0,0,0,0.3)]">
                       <img
                         src={s.image}
                         alt={s.title}
-                        className="h-full w-full object-cover rounded-xl transition-transform duration-700 hover:scale-105"
+                        className="h-full w-full object-cover rounded-xl transition-transform duration-[1200ms] hover:scale-110"
                       />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
                     </div>
                   </div>
                 </article>
@@ -158,14 +162,14 @@ export default function OurServices() {
         </div>
 
         {/* Navigation Dots */}
-        <div className="mt-12 flex justify-center gap-2">
+        <div className="mt-14 flex justify-center gap-2">
           {services.map((_, i) => (
             <button
               key={i}
               onClick={() => setActive(i)}
-              className={`h-2.5 w-2.5 rounded-full transition ${
+              className={`h-3 w-3 rounded-full transition-all duration-300 ${
                 active === i
-                  ? "bg-[#FF3B3B] scale-125"
+                  ? "bg-[#FF3B3B] scale-125 shadow-[0_0_15px_rgba(255,59,59,0.8)]"
                   : "bg-[#FF3B3B]/20 hover:bg-[#FF3B3B]/40"
               }`}
             />
