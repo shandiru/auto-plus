@@ -1,9 +1,17 @@
 "use client";
 import React from "react";
 import { Phone, Mail, MapPin, Facebook, Instagram, Wrench } from "lucide-react";
+import { HashLink as Link } from "react-router-hash-link"; // ✅ Import HashLink
 
 export default function Footer() {
   const accent = "#FF3B3B";
+
+  // Smooth scroll offset for fixed header
+  const scrollWithOffset = (el) => {
+    const yOffset = -80;
+    const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+    window.scrollTo({ top: y, behavior: "smooth" });
+  };
 
   return (
     <footer className="bg-[#000000] text-white font-inter border-t border-[#1A1A1A]">
@@ -68,19 +76,25 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-semibold mb-5 text-white">Quick Links</h4>
             <ul className="space-y-3 text-[#CCCCCC] text-sm">
-              <li className="hover:text-[#FF3B3B] transition-colors cursor-pointer">
-                <a href="/">Home</a>
-              </li>
-              <li className="hover:text-[#FF3B3B] transition-colors cursor-pointer">
-                <a href="/about">About Us</a>
-              </li>
-              <li className="hover:text-[#FF3B3B] transition-colors cursor-pointer">
-                <a href="/faq">FAQ</a>
-              </li>
-              <li className="hover:text-[#FF3B3B] transition-colors cursor-pointer">
-                <a href="/contact">Contact</a>
-              </li>
-              {/* Added Terms & Privacy links */}
+              {[
+                { name: "Home", href: "/#home" },
+                { name: "Services", href: "/#services" },
+                { name: "FAQ", href: "/#faq" },
+                { name: "Contact", href: "/#contact" },
+                { name: "Why Choose Us", href: "/#whychooseus" },
+                { name: "Review", href: "/#review" },
+              ].map((link) => (
+                <li
+                  key={link.name}
+                  className="hover:text-[#FF3B3B] transition-colors cursor-pointer"
+                >
+                  <Link smooth to={link.href} scroll={scrollWithOffset}>
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+
+              {/* Legal Links */}
               <li className="hover:text-[#FF3B3B] transition-colors cursor-pointer">
                 <a href="/terms-conditions">Terms & Conditions</a>
               </li>
@@ -101,12 +115,16 @@ export default function Footer() {
           <div className="flex items-center gap-4">
             <a
               href="https://web.facebook.com/p/AutoPlus-Nottingham-100092195330520"
+              target="_blank"
+              rel="noopener noreferrer"
               className="p-2 border border-[#1A1A1A] rounded-full hover:bg-[#FF3B3B] transition"
             >
               <Facebook size={16} />
             </a>
             <a
               href="https://www.instagram.com/Autoplusnottingham/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="p-2 border border-[#1A1A1A] rounded-full hover:bg-[#FF3B3B] transition"
             >
               <Instagram size={16} />
