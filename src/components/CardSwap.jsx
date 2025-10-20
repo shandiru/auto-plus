@@ -9,6 +9,9 @@ import React, {
   useRef,
 } from "react";
 import gsap from "gsap";
+import { Draggable } from "gsap/Draggable";
+
+gsap.registerPlugin(Draggable);
 
 export const Card = forwardRef(({ customClass, ...rest }, ref) => (
   <div
@@ -43,7 +46,7 @@ const placeNow = (el, slot) =>
 
 const CardSwap = ({
   width = 900,
-  height = 480, // 🔹 reduced height for tighter layout
+  height = 480,
   delay = 5000,
   pauseOnHover = true,
   easing = "power2.out",
@@ -122,8 +125,63 @@ const CardSwap = ({
       });
     };
 
+    // Initial placement
     swap();
     intervalRef.current = setInterval(swap, delay);
+
+    // 🔹 Add draggable functionality
+    refs.forEach((r) => {
+      const el = r.current;
+      Draggable.create(el, {
+        type: "x,y",
+        inertia: true,
+        edgeResistance: 0.8,
+        onPress() {
+          // Pause animation & add slight highlight
+          tlRef.current?.pause();
+          clearInterval(intervalRef.current);
+          gsap.to(el, {
+            scale: 1.05,
+            boxShadow: "0 0 25px rgba(255,59,59,0.5)",
+            duration: 0.2,
+            ease: "power2.out",
+          });
+        },
+        onRelease() {
+          // Remove highlight
+          gsap.to(el, {
+            scale: 1,
+            boxShadow: "0 8px 30px rgba(0,0,0,0.35)",
+            duration: 0.3,
+            ease: "power2.inOut",
+          });
+
+          // Move dragged card to front
+          const draggedIndex = refs.indexOf(r);
+          if (draggedIndex > -1) {
+            const oldOrder = order.current;
+            const newOrder = [draggedIndex, ...oldOrder.filter((v) => v !== draggedIndex)];
+            order.current = newOrder;
+
+            // Animate reordering
+            order.current.forEach((idx, pos) => {
+              const card = refs[idx].current;
+              gsap.to(card, {
+                x: makeSlot(pos, refs.length).x,
+                y: makeSlot(pos, refs.length).y,
+                z: makeSlot(pos, refs.length).z,
+                zIndex: makeSlot(pos, refs.length).zIndex,
+                duration: 0.6,
+                ease: "power2.out",
+              });
+            });
+          }
+
+          // Restart cycle
+          intervalRef.current = setInterval(swap, delay);
+        },
+      });
+    });
 
     if (pauseOnHover) {
       const node = container.current;
