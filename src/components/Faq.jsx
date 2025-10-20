@@ -50,13 +50,13 @@ export default function FAQSection() {
     AOS.init({
       duration: 1000,
       easing: "ease-in-out",
-      once: false, // allows animation to trigger when scrolling up/down
+      once: false,
     });
   }, []);
 
   return (
     <section
-      className="bg-[#000000] text-white font-inter py-24 px-6 border-t border-[#1A1A1A]"
+      className="bg-[#000000] text-white font-inter py-16 sm:py-20 md:py-24 px-4 sm:px-8 border-t border-[#1A1A1A]"
       id="faq"
     >
       <div
@@ -66,24 +66,26 @@ export default function FAQSection() {
         {/* Header */}
         <div
           data-aos="fade-down"
-          className="p-10 border-b border-[#1A1A1A] text-center"
+          className="p-6 sm:p-8 md:p-10 border-b border-[#1A1A1A] text-center"
         >
-          {/* Small red pill heading */}
-          <p className="inline-block border border-[#ff3b3b33] text-xs tracking-[4px] uppercase px-6 py-1 rounded-full text-[#ff6666] mb-6">
+          <p className="inline-block border border-[#ff3b3b33] text-[11px] sm:text-xs tracking-[4px] uppercase px-4 sm:px-6 py-1 rounded-full text-[#ff6666] mb-4 sm:mb-6">
             FAQ
           </p>
 
           <h2
             data-aos="zoom-in"
-            className="text-4xl md:text-5xl font-semibold tracking-tight"
+            className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight leading-snug sm:leading-tight md:leading-[1.2]"
           >
             Frequently Asked{" "}
-            <span className="text-[#FF3B3B] italic">Questions</span>
+            <span className="text-[#FF3B3B] italic block sm:inline">
+              Questions
+            </span>
           </h2>
+
           <p
             data-aos="fade-up"
             data-aos-delay="150"
-            className="text-[#CCCCCC] mt-3 text-base max-w-2xl mx-auto"
+            className="text-[#CCCCCC] mt-3 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed"
           >
             Everything you need to know about our mobile auto electrical
             services in Nottinghamshire.
@@ -102,13 +104,13 @@ export default function FAQSection() {
               data-aos="fade-up"
               data-aos-delay={100 + i * 50}
               onClick={() => toggle(i)}
-              className={`break-inside-avoid border-b border-[#1A1A1A] p-6 sm:p-8 cursor-pointer transition-colors ${
+              className={`break-inside-avoid border-b border-[#1A1A1A] p-5 sm:p-6 md:p-8 cursor-pointer transition-colors ${
                 i % 2 === 0 ? "md:border-r" : ""
               } ${openIndex === i ? "bg-[#0A0A0A]" : "hover:bg-[#111111]"}`}
             >
               {/* Question */}
               <div className="flex justify-between items-center select-none">
-                <h3 className="text-lg sm:text-xl font-medium text-white">
+                <h3 className="text-base sm:text-lg md:text-xl font-medium text-white pr-4">
                   {faq.q}
                 </h3>
                 <motion.div
