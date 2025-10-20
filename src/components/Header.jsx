@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { FiMenu, FiX, FiPhone } from "react-icons/fi";
-import { HashLink as Link } from "react-router-hash-link"; // ✅ Import HashLink
+import { HashLink as Link } from "react-router-hash-link";
 
 export default function Header() {
   const accent = "#FF3B3B";
@@ -14,12 +14,22 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Smooth scroll fix for all routes
+  // ✅ Smooth scroll fix for section links
   const scrollWithOffset = (el) => {
-    const yOffset = -80; // adjust for fixed header height
+    const yOffset = -80;
     const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
     window.scrollTo({ top: y, behavior: "smooth" });
   };
+
+  const navItems = [
+    "Home",
+    "Services",
+    "WhyChooseUs",
+    "Gallery",
+    "Review",
+    "FAQ",
+    "Contact",
+  ];
 
   return (
     <header
@@ -31,7 +41,7 @@ export default function Header() {
     >
       <div className="max-w-6xl mx-auto flex items-center justify-between px-6 py-4 lg:py-5">
         {/* ✅ Logo */}
-        <Link smooth to="/#home" scroll={scrollWithOffset} className="flex items-center">
+        <Link smooth to="/" className="flex items-center">
           <img
             src="/logo.png"
             alt="AutoPlus Logo"
@@ -40,20 +50,23 @@ export default function Header() {
         </Link>
 
         {/* ✅ Desktop Nav */}
-        <nav className="hidden lg:flex items-center gap-8 text-sm uppercase tracking-wide">
-          {["Home", "Services", "FAQ", "Contact", "WhyChooseUs", "Review"].map(
-            (item) => (
+        <nav className="hidden lg:flex items-center gap-8 text-sm tracking-wide">
+          {navItems.map((item) => {
+            const isHome = item.toLowerCase() === "home";
+            const linkPath = isHome ? "/" : `/#${item.toLowerCase()}`;
+
+            return (
               <Link
                 key={item}
                 smooth
-                to={`/#${item.toLowerCase()}`} // ✅ always reference homepage sections
-                scroll={scrollWithOffset}
+                to={linkPath}
+                scroll={!isHome ? scrollWithOffset : undefined}
                 className="text-[#CCCCCC] hover:text-[#FF3B3B] transition-colors"
               >
                 {item}
               </Link>
-            )
-          )}
+            );
+          })}
         </nav>
 
         {/* ✅ Call Now Button */}
@@ -78,21 +91,24 @@ export default function Header() {
       {/* ✅ Mobile Menu */}
       {isOpen && (
         <div className="lg:hidden bg-[#000000]/95 border-t border-[#1A1A1A] backdrop-blur-md">
-          <nav className="flex flex-col items-center py-6 space-y-4 text-sm uppercase tracking-wide">
-            {["Home", "Services", "FAQ", "Contact", "WhyChooseUs", "Review"].map(
-              (item) => (
+          <nav className="flex flex-col items-center py-6 space-y-4 text-sm tracking-wide">
+            {navItems.map((item) => {
+              const isHome = item.toLowerCase() === "home";
+              const linkPath = isHome ? "/" : `/#${item.toLowerCase()}`;
+
+              return (
                 <Link
                   key={item}
                   smooth
-                  to={`/#${item.toLowerCase()}`}
-                  scroll={scrollWithOffset}
+                  to={linkPath}
+                  scroll={!isHome ? scrollWithOffset : undefined}
                   className="text-[#CCCCCC] hover:text-[#FF3B3B] transition-colors"
                   onClick={() => setIsOpen(false)}
                 >
                   {item}
                 </Link>
-              )
-            )}
+              );
+            })}
 
             <a
               href="tel:+447495159438"
