@@ -93,13 +93,13 @@ export default function Footer() {
           {/* Social Icons */}
           <div className="flex items-center gap-4">
             <a
-              href="#"
+              href="https://web.facebook.com/p/AutoPlus-Nottingham-100092195330520"
               className="p-2 border border-[#1A1A1A] rounded-full hover:bg-[#FF3B3B] transition"
             >
               <Facebook size={16} />
             </a>
             <a
-              href="#"
+              href="https://www.instagram.com/Autoplusnottingham/"
               className="p-2 border border-[#1A1A1A] rounded-full hover:bg-[#FF3B3B] transition"
             >
               <Instagram size={16} />
@@ -111,6 +111,21 @@ export default function Footer() {
               <Wrench size={16} />
             </a>
           </div>
+        </div>
+
+        {/* Powered by Ansely */}
+        <div className="mt-6 text-center text-xs text-[#777777]">
+          <span>
+            Powered by{" "}
+            <a
+              href="https://www.ansely.co.uk/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#FF3B3B] font-semibold tracking-wide hover:underline hover:text-[#ff5c5c] transition-colors duration-300"
+            >
+              Ansely
+            </a>
+          </span>
         </div>
       </div>
     </footer>
