@@ -110,7 +110,7 @@ export default function FAQSection() {
             >
               {/* Question */}
               <div className="flex justify-between items-center select-none">
-                <h3 className="text-base sm:text-lg md:text-xl font-medium text-white pr-4">
+                <h3 className="text-base sm:text-lg md:text-lg font-medium text-white pr-4">
                   {faq.q}
                 </h3>
                 <motion.div
