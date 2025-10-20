@@ -2,9 +2,21 @@
 import React, { useEffect, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import CardSwap, { Card } from "./CardSwap";
 
 export default function OurServices() {
-  const [active, setActive] = useState(0);
+  const [viewport, setViewport] = useState("desktop");
+
+  useEffect(() => {
+    const detectViewport = () => {
+      if (window.innerWidth < 640) setViewport("mobile");
+      else if (window.innerWidth < 1024) setViewport("tablet");
+      else setViewport("desktop");
+    };
+    detectViewport();
+    window.addEventListener("resize", detectViewport);
+    return () => window.removeEventListener("resize", detectViewport);
+  }, []);
 
   const services = [
     {
@@ -61,25 +73,28 @@ export default function OurServices() {
     AOS.init({
       duration: 1000,
       easing: "ease-in-out",
-      once: false, // allows animation on both scroll up & down
+      once: false,
     });
-
-    const timer = setInterval(
-      () => setActive((prev) => (prev + 1) % services.length),
-      6000
-    );
-    return () => clearInterval(timer);
   }, []);
+
+  // Dynamically adjust size
+  const getSize = () => {
+    if (viewport === "mobile") return { width: 340, height: 420 };
+    if (viewport === "tablet") return { width: 700, height: 420 };
+    return { width: 900, height: 380 }; // desktop fixed height
+  };
+
+  const { width, height } = getSize();
 
   return (
     <section
-      className="relative overflow-hidden bg-[#000000] text-white font-inter py-24 border-t border-[#1A1A1A]"
+      className="relative overflow-hidden bg-[#000000] text-white font-inter py-16 md:py-20 border-t border-[#1A1A1A]"
       id="services"
     >
       {/* Background Glow */}
       <div className="pointer-events-none absolute inset-0 mx-auto max-w-6xl opacity-70">
         <div
-          className="absolute left-1/2 top-[25%] -translate-x-1/2 w-[1400px] h-[1400px] rounded-full blur-[150px]"
+          className="absolute left-1/2 top-[25%] -translate-x-1/2 w-[1200px] h-[1200px] rounded-full blur-[150px]"
           style={{
             background:
               "radial-gradient(circle, rgba(255,59,59,0.1) 0%, transparent 70%)",
@@ -91,7 +106,7 @@ export default function OurServices() {
         {/* Section Badge */}
         <p
           data-aos="fade-down"
-          className="inline-block border border-[#ff3b3b33] text-xs tracking-[4px] uppercase px-6 py-1 rounded-full text-[#ff6666] mb-6"
+          className="inline-block border border-[#ff3b3b33] text-xs tracking-[4px] uppercase px-6 py-1 rounded-full text-[#ff6666] mb-5"
         >
           Our Services
         </p>
@@ -99,7 +114,7 @@ export default function OurServices() {
         {/* Heading */}
         <h2
           data-aos="zoom-in"
-          className="mb-3 text-4xl md:text-5xl font-semibold text-white"
+          className="mb-3 text-3xl sm:text-4xl md:text-5xl font-semibold text-white"
         >
           Expert <span className="italic text-[#FF3B3B]">Auto Electrical</span>{" "}
           Solutions
@@ -107,66 +122,52 @@ export default function OurServices() {
         <p
           data-aos="fade-up"
           data-aos-delay="150"
-          className="mb-20 text-base text-[#AAAAAA] max-w-2xl mx-auto"
+          className="mb-10 text-sm sm:text-base text-[#AAAAAA] max-w-2xl mx-auto"
         >
           From diagnostics to key programming, we bring professional-grade
           service directly to your driveway.
         </p>
 
-        {/* 3D Card Stack */}
+        {/* GSAP Card Stack */}
         <div
           data-aos="fade-up"
           data-aos-delay="200"
-          className="relative mx-auto flex h-[520px] w-full max-w-[940px] items-center justify-center [perspective:1400px] [transform-style:preserve-3d]"
+          className="relative mx-auto flex w-full items-center justify-center overflow-visible mt-36 sm:mt-36 md:mt-36"
+          style={{ height }}
         >
-          {services.map((s, i) => {
-            const offset = i - active;
-            const depth = Math.abs(offset);
-            const isActive = offset === 0;
-            const translateY = offset * 50;
-            const translateZ = -depth * 120;
-            const scale = 1 - depth * 0.08;
-
-            return (
-              <div
-                key={s.id}
-                data-aos="zoom-in-up"
-                data-aos-delay={i * 100}
-                className="absolute w-full transition-all duration-[1100ms] ease-[cubic-bezier(0.4,0,0.2,1)]"
-                style={{
-                  transform: `translateY(${translateY}px) translateZ(${translateZ}px) scale(${scale})`,
-                  zIndex: 100 - depth,
-                  opacity: isActive ? 1 : 0.65,
-                  filter: isActive ? "none" : "blur(2px) brightness(0.8)",
-                }}
-              >
-                <article className="rounded-2xl border border-[#ff3b3b33] bg-[#0A0A0A]/95 shadow-[0_0_50px_rgba(255,59,59,0.15)] backdrop-blur-md overflow-hidden hover:shadow-[0_0_60px_rgba(255,59,59,0.25)] transition-shadow duration-700">
-                  {/* Header */}
-                  <div className="bg-[#141414]/80 px-6 py-3 text-left border-b border-[#ff3b3b33]">
-                    <h3 className="text-lg md:text-xl font-semibold text-[#FF3B3B] tracking-wide">
+          <CardSwap width={width} height={height} delay={5000} pauseOnHover>
+            {services.map((s) => (
+              <Card key={s.id}>
+                <article className="rounded-2xl border border-[#1E1E1E] bg-[#0C0C0C] shadow-[0_8px_40px_rgba(0,0,0,0.45)] overflow-hidden backdrop-blur-md">
+                  {/* Top Bar */}
+                  <div className="flex items-center justify-between px-5 sm:px-6 py-3 border-b border-[#1E1E1E] bg-[#111111]">
+                    <h3 className="text-[#FF3B3B] font-semibold text-base sm:text-lg tracking-wide">
                       {s.title}
                     </h3>
+                    <div className="flex gap-1">
+                      <div className="w-2 h-2 rounded-full bg-[#FF4B4B]/70"></div>
+                      <div className="w-2 h-2 rounded-full bg-[#FF9F43]/70"></div>
+                      <div className="w-2 h-2 rounded-full bg-[#4BFF75]/70"></div>
+                    </div>
                   </div>
 
-                  {/* Body */}
-                  <div className="grid md:grid-cols-2 items-center gap-8 p-8 md:p-10">
+                  {/* Content */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-6 sm:gap-8 p-6 sm:p-8 md:p-10">
                     {/* Text */}
-                    <div className="text-left">
-                      <p className="mb-8 text-[15px] leading-relaxed text-[#CCCCCC]">
+                    <div className="text-left order-2 md:order-1">
+                      <p className="mb-6 sm:mb-8 text-[14px] sm:text-[15px] leading-relaxed text-[#CCCCCC]">
                         {s.description}
                       </p>
-                      <div className="flex flex-wrap gap-4">
+                      <div className="flex flex-wrap gap-4 justify-center md:justify-start">
                         {s.stats.map((stat) => (
                           <div
                             key={stat.label}
-                            data-aos="fade-up"
-                            data-aos-delay="400"
-                            className="flex-1 min-w-[140px] rounded-lg border border-[#ff3b3b33] bg-[#111111]/60 p-4 text-center transition hover:bg-[#1A1A1A]"
+                            className="flex-1 min-w-[120px] sm:min-w-[140px] rounded-xl border border-[#222] bg-[#121212] p-3 sm:p-4 text-center"
                           >
-                            <div className="text-2xl font-semibold text-white">
+                            <div className="text-xl sm:text-2xl font-semibold text-white">
                               {stat.value}
                             </div>
-                            <div className="text-xs text-[#AAAAAA] mt-1">
+                            <div className="text-[11px] sm:text-xs text-gray-500 mt-1">
                               {stat.label}
                             </div>
                           </div>
@@ -175,41 +176,18 @@ export default function OurServices() {
                     </div>
 
                     {/* Image */}
-                    <div
-                      data-aos="fade-left"
-                      className="relative h-56 md:h-64 overflow-hidden rounded-xl shadow-[0_0_25px_rgba(0,0,0,0.3)]"
-                    >
+                    <div className="relative h-44 sm:h-52 md:h-64 overflow-hidden rounded-xl order-1 md:order-2">
                       <img
                         src={s.image}
                         alt={s.title}
-                        className="h-full w-full object-cover rounded-xl transition-transform duration-[1200ms] hover:scale-110"
+                        className="h-full w-full object-cover rounded-xl transition-transform duration-700 hover:scale-105"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
                     </div>
                   </div>
                 </article>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Navigation Dots */}
-        <div
-          data-aos="fade-up"
-          data-aos-delay="400"
-          className="mt-14 flex justify-center gap-2"
-        >
-          {services.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setActive(i)}
-              className={`h-3 w-3 rounded-full transition-all duration-300 ${
-                active === i
-                  ? "bg-[#FF3B3B] scale-125 shadow-[0_0_15px_rgba(255,59,59,0.8)]"
-                  : "bg-[#FF3B3B]/20 hover:bg-[#FF3B3B]/40"
-              }`}
-            />
-          ))}
+              </Card>
+            ))}
+          </CardSwap>
         </div>
       </div>
     </section>
