@@ -6,25 +6,25 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 export default function AutoPlusTestimonial() {
-  const accent = "#FF3B3B"; // 🔴 AutoPlus Red
+  const accent = "#FF3B3B";
 
   const testimonials = [
     {
       name: "Cally Keetley .",
       role: "Customer from Nottingham",
-      text: "“Rang on the Monday, got an appointment for Tuesday with plenty of upfront and transparent information about costs. Mike was quick and efficient and fixed the issue (fault with electric windows) in less than an hour.”",
+      text: "Rang on the Monday, got an appointment for Tuesday with plenty of upfront and transparent information about costs. Mike was quick and efficient and fixed the issue (fault with electric windows) in less than an hour.",
       img: "c.png",
     },
     {
       name: "Tommy Merrall .",
       role: "Customer from Nottingham",
-      text: "“BMW X5 electrical issues, 4 hours later car fixed and running. 5 star thank you..”",
+      text: "BMW X5 electrical issues, 4 hours later car fixed and running. 5 star thank you!",
       img: "t.png",
     },
     {
       name: "Sylwia Ksiazkiewicz.",
       role: "Customer from Nottingham",
-      text: "“Profesional and quick. Highly recommended.”",
+      text: "Professional and quick. Highly recommended!",
       img: "s.png",
     },
   ];
@@ -35,11 +35,7 @@ export default function AutoPlusTestimonial() {
   const [isTyping, setIsTyping] = useState(false);
 
   useEffect(() => {
-    AOS.init({
-      duration: 1000,
-      easing: "ease-in-out",
-      once: false, // allows re-triggering when scrolling up/down
-    });
+    AOS.init({ duration: 1000, easing: "ease-in-out", once: false });
   }, []);
 
   const next = () => {
@@ -54,22 +50,25 @@ export default function AutoPlusTestimonial() {
 
   const t = testimonials[index];
 
-  // Typewriter Effect
+  // ✅ Safe Typewriter (no undefined)
   useEffect(() => {
+    let i = 0;
+    const text = String(t.text || "");
     setTypedText("");
     setIsTyping(true);
-    let i = 0;
-    const text = t.text;
+
     const interval = setInterval(() => {
-      setTypedText((prev) => prev + text[i]);
-      i++;
-      if (i >= text.length) {
+      if (i < text.length && typeof text[i] === "string") {
+        setTypedText((prev) => prev + text[i-1]);
+        i++;
+      } else {
         clearInterval(interval);
         setIsTyping(false);
       }
     }, 25);
+
     return () => clearInterval(interval);
-  }, [index]);
+  }, [index, t.text]);
 
   return (
     <section
@@ -78,30 +77,23 @@ export default function AutoPlusTestimonial() {
     >
       <div
         data-aos="fade-up"
-        className="max-w-6xl mx-auto border border-[#1A1A1A] bg-[#0A0A0A] rounded-md"
+        className="max-w-6xl mx-auto border border-[#1A1A1A] bg-[#0A0A0A] rounded-md overflow-hidden"
       >
         {/* Header */}
         <div
           data-aos="fade-down"
           className="text-center py-10 sm:py-12 border-b border-[#1A1A1A] px-4"
         >
-          {/* Small red pill heading */}
           <p className="inline-block border border-[#ff3b3b33] text-xs tracking-[4px] uppercase px-6 py-1 rounded-full text-[#ff6666] mb-6">
             Review
           </p>
 
-          <h2
-            data-aos="zoom-in"
-            className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight leading-snug"
-          >
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold leading-snug">
             What Our{" "}
             <span className="text-[#FF3B3B] italic">Customers Say</span>
           </h2>
-          <p
-            data-aos="fade-up"
-            data-aos-delay="150"
-            className="text-[#CCCCCC] text-sm sm:text-base mt-3 max-w-2xl mx-auto"
-          >
+
+          <p className="text-[#CCCCCC] text-sm sm:text-base mt-3 max-w-2xl mx-auto">
             Real feedback from our happy customers across Nottinghamshire who
             trust AutoPlus for all their electrical and diagnostic needs.
           </p>
@@ -110,14 +102,10 @@ export default function AutoPlusTestimonial() {
         {/* Main Section */}
         <div
           data-aos="fade-up"
-          data-aos-delay="250"
-          className="flex flex-col md:flex-row relative overflow-hidden"
+          className="flex flex-col md:flex-row overflow-hidden"
         >
           {/* LEFT SIDE */}
-          <div
-            className="flex-1 relative p-8 sm:p-10 md:p-14 border-b md:border-b-0 md:border-r border-[#1A1A1A]
-            [background-image:radial-gradient(900px_700px_at_20%_20%,rgba(255,59,59,0.06),transparent_70%)] min-h-[380px] sm:min-h-[420px]"
-          >
+          <div className="flex-1 p-8 sm:p-10 md:p-14 border-b md:border-b-0 md:border-r border-[#1A1A1A] bg-[#0A0A0A]/60 [background-image:radial-gradient(900px_700px_at_20%_20%,rgba(255,59,59,0.06),transparent_70%)]">
             <AnimatePresence mode="wait" custom={direction}>
               <motion.div
                 key={index}
@@ -126,13 +114,10 @@ export default function AutoPlusTestimonial() {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: direction > 0 ? -100 : 100 }}
                 transition={{ duration: 0.5, ease: "easeInOut" }}
-                className="absolute inset-0 p-8 sm:p-10 md:p-14"
+                className="flex flex-col h-auto"
               >
                 {/* Avatar */}
-                <div
-                  data-aos="fade-right"
-                  className="flex items-center gap-3 mb-6 sm:mb-8"
-                >
+                <div className="flex items-center gap-3 mb-6 sm:mb-8">
                   <div className="relative">
                     <img
                       src={t.img}
@@ -148,12 +133,8 @@ export default function AutoPlusTestimonial() {
                   </div>
                 </div>
 
-                {/* Quote with typing animation */}
-                <p
-                  data-aos="zoom-in"
-                  data-aos-delay="150"
-                  className="text-[20px] sm:text-[22px] md:text-[26px] leading-relaxed text-[#EEEEEE] max-w-[62ch] min-h-[150px]"
-                >
+                {/* Review Text */}
+                <p className="text-[16px] sm:text-[18px] md:text-[20px] leading-relaxed text-[#EEEEEE] mb-8 sm:mb-10">
                   {typedText}
                   {isTyping && (
                     <span className="animate-pulse text-[#FF3B3B]">|</span>
@@ -161,46 +142,35 @@ export default function AutoPlusTestimonial() {
                 </p>
 
                 {/* Name + Role */}
-                <div
-                  data-aos="fade-up"
-                  data-aos-delay="300"
-                  className="mt-8 sm:mt-12"
-                >
+                <div className="mt-auto">
                   <p className="font-semibold text-white">{t.name}</p>
-                  <p className="text-[#AAAAAA] text-[14px] sm:text-[15px]">
+                  <p className="text-[#AAAAAA] text-sm sm:text-base">
                     {t.role}
                   </p>
                 </div>
 
                 {/* Counter */}
-                <p className="absolute bottom-4 sm:bottom-6 right-8 sm:right-10 text-[#666666] text-sm">
+                <p className="mt-4 text-[#666666] text-xs sm:text-sm">
                   {index + 1}/{testimonials.length}
                 </p>
               </motion.div>
             </AnimatePresence>
           </div>
 
-          {/* RIGHT SIDE - Buttons */}
-          <div
-            data-aos="fade-left"
-            data-aos-delay="200"
-            className="md:w-[320px] flex flex-col justify-end bg-[#0A0A0A] border-l border-t border-[#1A1A1A]"
-          >
-            {/* Previous */}
+          {/* RIGHT SIDE */}
+          <div className="md:w-[320px] flex flex-col justify-end bg-[#0A0A0A] border-t md:border-t-0 border-l border-[#1A1A1A]">
             <motion.button
               whileTap={{ scale: 0.95 }}
               onClick={prev}
-              className="flex items-center gap-1 justify-start px-8 py-6 border-b border-[#1A1A1A] hover:text-[#FF3B3B] transition-colors"
+              className="flex items-center gap-1 justify-start px-8 py-5 border-b border-t border-[#1A1A1A] hover:text-[#FF3B3B] transition-colors"
             >
               <ChevronLeft size={18} />
               <span>Previous</span>
             </motion.button>
-
-            {/* Next */}
             <motion.button
               whileTap={{ scale: 0.95 }}
               onClick={next}
-              className="flex items-center gap-1 justify-end px-8 py-6 hover:text-[#FF3B3B] transition-colors"
+              className="flex items-center gap-1 justify-end px-8 py-5 hover:text-[#FF3B3B] transition-colors"
             >
               <span>Next</span>
               <ChevronRight size={18} />
