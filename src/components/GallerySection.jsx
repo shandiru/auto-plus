@@ -15,10 +15,10 @@ export default function GallerySection() {
 
   // You can replace these with your real images and titles
   const galleryItems = [
-    { image: "a1.jpg", text: "Auto Electricians" },
-    { image: "ke.jpg", text: "Key Cutting" },
-    { image: "k1.jpg", text: "Key Programming" },
-    { image: "d1.jpg", text: "Diagnostics" },
+    { image: "a1.png", text: "Auto Electricians" },
+    { image: "ke.png", text: "Key Cutting" },
+    { image: "k1.png", text: "Key Programming" },
+    { image: "d1.png", text: "Diagnostics" },
   ];
 
   return (

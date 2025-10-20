@@ -29,7 +29,7 @@ export default function OurServices() {
         { value: "97%", label: "First-Time Fix Rate" },
       ],
       image:
-        "a1.jpg",
+        "a1.png",
     },
     {
       id: 1,
@@ -41,7 +41,7 @@ export default function OurServices() {
         { value: "99%", label: "Accuracy in Blade Matching" },
       ],
       image:
-        "ke.jpg",
+        "ke.png",
     },
     {
       id: 2,
@@ -53,7 +53,7 @@ export default function OurServices() {
         { value: "100%", label: "Compatibility Guarantee" },
       ],
       image:
-        "k1.jpg",
+        "k1.png",
     },
     {
       id: 3,
@@ -65,7 +65,7 @@ export default function OurServices() {
         { value: "500+", label: "Vehicles Diagnosed Across Nottinghamshire" },
       ],
       image:
-        "d1.jpg",
+        "d1.png",
     },
   ];
 
