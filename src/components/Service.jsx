@@ -29,7 +29,7 @@ export default function OurServices() {
         { value: "97%", label: "First-Time Fix Rate" },
       ],
       image:
-        "https://images.unsplash.com/photo-1625047509168-7c43c6a5745d?q=80&w=1200&auto=format&fit=crop",
+        "a1.jpg",
     },
     {
       id: 1,
@@ -41,7 +41,7 @@ export default function OurServices() {
         { value: "99%", label: "Accuracy in Blade Matching" },
       ],
       image:
-        "https://images.unsplash.com/photo-1615652669283-1e44b43fafd6?q=80&w=1200&auto=format&fit=crop",
+        "ke.jpg",
     },
     {
       id: 2,
@@ -53,7 +53,7 @@ export default function OurServices() {
         { value: "100%", label: "Compatibility Guarantee" },
       ],
       image:
-        "https://images.unsplash.com/photo-1613544922001-4a9bdb8b13a2?q=80&w=1200&auto=format&fit=crop",
+        "k1.jpg",
     },
     {
       id: 3,
@@ -65,7 +65,7 @@ export default function OurServices() {
         { value: "500+", label: "Vehicles Diagnosed Across Nottinghamshire" },
       ],
       image:
-        "https://images.unsplash.com/photo-1607860108855-0b8c74d73cd3?q=80&w=1200&auto=format&fit=crop",
+        "d1.jpg",
     },
   ];
 

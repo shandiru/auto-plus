@@ -8,6 +8,7 @@ import Service from "../components/Service"
 import Review from "../components/Review"
 import Faq from "../components/Faq"
 import HeroSection from "../components/HeroSection"
+import GallerySection from "../components/GallerySection"
 const Home = () => {
     return (
         <div>
@@ -17,6 +18,7 @@ const Home = () => {
             <Service />
             <Review />
             <Faq />
+            <GallerySection />
              <WhyChooseUs />
             <GetInTouch />
         </div>
