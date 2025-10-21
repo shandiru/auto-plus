@@ -129,12 +129,7 @@ export default function Footer() {
             >
               <Instagram size={16} />
             </a>
-            <a
-              href="#"
-              className="p-2 border border-[#1A1A1A] rounded-full hover:bg-[#FF3B3B] transition"
-            >
-              <Wrench size={16} />
-            </a>
+           
           </div>
         </div>
 
