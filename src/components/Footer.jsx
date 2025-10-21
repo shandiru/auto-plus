@@ -37,12 +37,20 @@ export default function Footer() {
                 <Phone size={18} color={accent} />
                 <a href="tel:+447495159438">+44 7495 159438</a>
               </li>
-              <li className="flex items-center gap-3 hover:text-[#FF3B3B] transition-colors">
-                <Mail size={18} color={accent} />
-                <a href="mailto:info@autoplusnottingham.co.uk">
-                  info@autoplusnottingham.co.uk
-                </a>
-              </li>
+              <li className="flex gap-3 items-start text-sm text-[#CCCCCC]">
+  <Mail
+    size={18}
+    className="mt-1 text-[#FF3B3B] shrink-0"
+    aria-hidden="true"
+  />
+  <a
+    href="mailto:info@autoplusnottingham.co.uk"
+    className="hover:text-[#FF3B3B] break-words leading-snug w-full"
+  >
+    info@autoplusnottingham.co.uk
+  </a>
+</li>
+
               <li className="flex items-start gap-3 hover:text-[#FF3B3B] transition-colors">
                 <MapPin size={18} color={accent} className="mt-1" />
                 <span>Nottinghamshire, United Kingdom</span>
