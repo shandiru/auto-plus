@@ -13,12 +13,20 @@ export default function GallerySection() {
     });
   }, []);
 
-  // You can replace these with your real images and titles
+  // Updated gallery items (mix of images and videos)
   const galleryItems = [
-    { image: "a1.png", text: "Auto Electricians" },
-    { image: "ke.png", text: "Key Cutting" },
-    { image: "k1.png", text: "Key Programming" },
-    { image: "d1.png", text: "Diagnostics" },
+       { type: "image", src: "im.jpeg", text: "Our Workshop" },
+    { type: "image", src: "im2.jpeg", text: "Customer Vehicles" },
+    { type: "video", src: "v1.mp4", text: "Engine Diagnostics" },
+    { type: "video", src: "v2.mp4", text: "Electrical Systems" },
+    { type: "video", src: "v3.mp4", text: "Auto Repair" },
+    { type: "video", src: "v4.mp4", text: "Testing & Tools" },
+    { type: "video", src: "v5.mp4", text: "Key Programming" },
+    { type: "video", src: "v6.mp4", text: "Workshop Overview" },
+ 
+    { type: "image", src: "im3.jpeg", text: "Diagnostic Equipment" },
+    { type: "image", src: "im4.jpeg", text: "Our Team in Action" },
+    { type: "image", src: "im5.jpeg", text: "Completed Projects" },
   ];
 
   return (
@@ -68,10 +76,7 @@ export default function GallerySection() {
         data-aos="fade-up"
         data-aos-delay="200"
         className="relative z-10 mx-auto max-w-[1200px] w-full px-4 sm:px-6 md:px-8"
-        style={{
-          height: "600px",
-          position: "relative",
-        }}
+        style={{ height: "600px", position: "relative" }}
       >
         <CircularGallery
           items={galleryItems}
